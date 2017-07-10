@@ -1,0 +1,130 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+body {
+  position: relative;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: rgba(0,0,0,0.8);
+  text-shadow: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+section {
+  position: relative;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p,
+.p {
+  font-size:  1rem;
+  line-height: 1.375rem;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+small,
+.small {
+  font-size: 0.8125rem;
+  line-height: 1rem;
+}
+
+a,
+.a {
+  color: inherit;
+  text-decoration: none;
+}
+
+sup {
+  font-size: 58%;
+}
+
+em,
+i {
+  font-style: italic;
+  line-height: inherit;
+}
+
+hr,
+.hr {
+  height: 0;
+  border: solid #eee;
+  border-width: 1px 0 0;
+  clear: both;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  margin: 5px 0;
+  font-size: 1rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+.h1 {
+  font-size: 2.1875rem;
+  line-height: 2.375rem;
+  @media (--phone-landscape) {
+    font-size: 1.875rem;
+    line-height: 2.1875rem;
+  }
+}
+
+h2,
+.h2 {
+  font-size: 1.5625rem;
+  line-height: 2.0625rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.4375rem;
+  line-height: 1.750rem;
+}
+
+h4,
+.h4 {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+h6,
+.h6 {
+  font-size: 0.875rem;
+  line-height: 1.085rem;
+}

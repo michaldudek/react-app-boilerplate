@@ -1,0 +1,39 @@
+/*
+ * Variables
+ *
+ * Set various variables in this file and then use them by importing this file.
+ */
+
+:root {
+  /* Colours */
+  --black: #000;
+  --white: #fff;
+  --red: #f1213a;
+  --green: #74cb83;
+
+  /* Type */
+  --type: #383839;
+  --type-grey: #8B8B8B;
+  --type-light-grey: #b2b2b2;
+  --type-lighter-grey: #B6B6B6;
+  --type-lighter: #d0d0d0;
+  --type-light: #ededed;
+
+  /* Easings and animations */
+  --ease: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/*
+ * Media Queries
+ *
+ * Usage:
+ *
+ * @media (--phone-landscape) { }
+ */
+@custom-media --phone-portrait (max-width: 480px);
+@custom-media --phone-landscape (max-width: 670px);
+@custom-media --tablet-portrait (max-width: 768px);
+@custom-media --tablet-landscape (max-width: 1024px);
+@custom-media --desktop-small (max-width: 1240px);
+@custom-media --desktop-medium (max-width: 1320px);
+@custom-media --desktop-large (max-width: 1580px);
