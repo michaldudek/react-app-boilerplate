@@ -9,5 +9,5 @@ build: clear
 dev: clear
 	NODE_ENV=development node src/server.js
 
-start: clear
+start:
 	NODE_ENV=production node src/server.js

@@ -1,10 +1,27 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Pałys & Dudek React App</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <!-- stylesheets -->
+    {% for url in styles %}
+        <link rel="stylesheet" type="text/css" href="{{ url }}" />
+    {% endfor %}
 </head>
 <body>
 
     <div id="root">{{ html }}</div>
 
+    <!-- javascripts -->
+    {% for url in scripts %}
+        <script type="text/javascript" src="{{ url }}"></script>
+    {% endfor %}
 </body>
 </html>

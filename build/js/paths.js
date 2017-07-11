@@ -6,11 +6,15 @@ const path = require('path')
 const rootDir = fs.realpathSync(process.cwd())
 const resolve = (relativePath) => path.resolve(rootDir, relativePath)
 
+const webDir = resolve('web')
+const webDirRegEx = new RegExp(`^${webDir}`)
+const resolveWeb = (filePath) => filePath.replace(webDirRegEx, '')
+
 module.exports = {
   // main dirs
-  rootDir: rootDir,
+  root: rootDir,
   src: resolve('src'),
-  web: resolve('web'),
+  web: webDir,
   dist: resolve('web/dist'),
   templates: resolve('src/templates'),
 
@@ -21,5 +25,8 @@ module.exports = {
 
   // important files
   indexJs: resolve('src/index.js'),
-  webpackConfigFile: resolve('build/js/config')
+  webpackConfigFile: resolve('build/js/config'),
+
+  // functions
+  resolveWeb: resolveWeb
 }
