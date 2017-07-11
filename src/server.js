@@ -25,7 +25,7 @@ app.set('view engine', 'html')
 app.use('/api', api())
 
 // register React rendering
-app.use('/', ssr())
+app.use('/', ssr(app))
 
 app.listen(3000, () => {
   console.log('Listening on port 3000!')

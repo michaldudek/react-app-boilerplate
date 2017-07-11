@@ -1,3 +1,13 @@
+/*
+ * Webpack Config
+ *
+ * ENV responsive config, that has different options based on NODE_ENV :P
+ */
+
+// simple flags
+const isProduction = process.env.NODE_ENV === 'production'
+const isDevelopment = !isProduction
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const postcssImport = require('postcss-import')
 const postcssNext = require('postcss-cssnext')
@@ -14,7 +24,7 @@ module.exports = {
     app: [paths.indexJs]
   },
   output: {
-    filename: '[name].[chunkhash:8].js',
+    filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
     path: paths.dist
   },
   resolve: {
@@ -34,7 +44,7 @@ module.exports = {
                 minimize: true,
                 sourceMap: true,
                 modules: true,
-                localIdentName: '[name]__[local]__[hash:base64:5]'
+                localIdentName: isProduction ? '[hash:base64:5]' : '[name]__[local]__[hash:base64:5]'
               }
             },
             {
@@ -62,7 +72,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: '[name].[contenthash:8].css'
+      filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
     })
   ]
 }

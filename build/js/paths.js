@@ -25,7 +25,7 @@ module.exports = {
 
   // important files
   indexJs: resolve('src/index.js'),
-  webpackConfigFile: resolve('build/js/config'),
+  webpackConfigFile: resolve('build/js/webpack.config'),
 
   // functions
   resolveWeb: resolveWeb
