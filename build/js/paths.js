@@ -12,12 +12,14 @@ module.exports = {
   src: resolve('src'),
   web: resolve('web'),
   dist: resolve('web/dist'),
+  templates: resolve('src/templates'),
 
   // vendor dirs etc
-  webpackConfig: resolve('build/webpack'),
+  build: resolve('build/js'),
   nodeModules: resolve('node_modules'),
   packageJson: resolve('package.json'),
 
   // important files
-  indexJs: resolve('src/index.js')
+  indexJs: resolve('src/index.js'),
+  webpackConfigFile: resolve('build/js/config')
 }
