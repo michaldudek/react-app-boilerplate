@@ -1,4 +1,4 @@
-// load and register babel to use
+// load and register babel to use all the fancy new js stuff
 require('babel-register')({
   'presets': ['es2015', 'react-app']
 })

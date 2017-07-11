@@ -1,3 +1,12 @@
+/*
+ * SSR
+ *
+ * Renders React pages on the server.
+ *
+ * When NODE_ENV=production it will just render React page and provide links to assets.
+ *
+ * In development it serves as a webpack dev server and still supports SSR of React.
+ */
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 
@@ -8,12 +17,11 @@ const isDevelopment = !isProduction
 // load different files depending on context
 const assets = require(isProduction ? './assets.prod.js' : './assets.dev.js').default
 
-// const paths = require('../build/js/paths')
-
-// const webpackDevMiddleware = require('webpack-dev-middleware')
-// const webpack = require('webpack')
-// const webpackConfig = require(paths.webpackConfigFile)
-
+/**
+ * Exports middleware that handles server side rendering of React.
+ *
+ * @return {Function}
+ */
 export default () => (req, res) => {
   const html = renderToString((
     <h1>This is REACT! and its.... {isDevelopment ? 'development' : 'production'}</h1>
