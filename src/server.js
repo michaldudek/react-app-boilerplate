@@ -1,13 +1,29 @@
+// simple flags
+const isProduction = process.env.NODE_ENV === 'production'
+const isDevelopment = !isProduction
+
+// also require paths
+const paths = require('../build/js/paths')
+
 // load and register babel to use all the fancy new js stuff
 require('babel-register')({
-  'presets': ['es2015', 'react-app']
+  presets: ['es2015', 'react-app'],
+  ignore: paths.nodeModules,
+  plugins: [
+    ['css-modules-transform', {
+      generateScopedName: isProduction ? '[hash:base64:8]' : '[name]__[local]__[hash:base64:5]',
+      extensions: ['.css']
+    }],
+    ['module-resolver', {
+      root: [paths.src],
+      extensions: ['.js', '.css', '.json']
+    }]
+  ]
 })
 require('babel-polyfill')
 
 const express = require('express')
 const nunjucks = require('nunjucks')
-
-const paths = require('../build/js/paths')
 
 const api = require('./api').default
 const ssr = require('./ssr').default
