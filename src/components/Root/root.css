@@ -5,7 +5,7 @@
 }
 
 .title {
-  color: --var(--green);
+  color: var(--red);
 }
 
 .subtitle {
