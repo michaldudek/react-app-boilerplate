@@ -10,10 +10,6 @@ const webpackMiddleware = webpackDevMiddleware(compiler, {
   publicPath: '/'
 })
 
-/**
- * [description]
- * @return {[type]} [description]
- */
 export default () => ({
   styles: ['app.css'],
   scripts: ['vendors.js', 'app.js']

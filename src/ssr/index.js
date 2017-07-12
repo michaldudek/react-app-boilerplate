@@ -8,6 +8,8 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 
+import Root from 'components/Root'
+
 // simple flags
 const isProduction = process.env.NODE_ENV === 'production'
 const isDevelopment = !isProduction
@@ -29,7 +31,7 @@ export default (app) => {
 
   return (req, res) => {
     const html = renderToString((
-      <h1>This is REACT! and its.... {isDevelopment ? 'development' : 'production'}</h1>
+      <Root />
     ))
 
     res.render('index', {

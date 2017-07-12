@@ -1,0 +1,19 @@
+@import 'styles/variables.css';
+
+.root {
+  @neat-span-columns 12;
+}
+
+.title {
+  color: --var(--green);
+}
+
+.subtitle {
+  composes: small from 'styles/base.css';
+}
+
+.image {
+  display: block;
+  width: 50%;
+  margin: 50px auto;
+}

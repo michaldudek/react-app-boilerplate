@@ -19,7 +19,7 @@ module.exports = {
   entry: {
     vendors: [
       'react',
-      'lodash'
+      'react-dom'
     ],
     app: [paths.indexJs]
   },
@@ -32,6 +32,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react-app']
+          }
+        }
+      },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
