@@ -8,6 +8,7 @@
 const isProduction = process.env.NODE_ENV === 'production'
 const isDevelopment = !isProduction
 
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const postcssImport = require('postcss-import')
 const postcssNext = require('postcss-cssnext')
@@ -83,6 +84,9 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({
       filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors'
     })
   ]
 }
