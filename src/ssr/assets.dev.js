@@ -6,8 +6,8 @@ import * as paths from '../../build/js/paths'
 const webpackConfig = require(paths.webpackConfigFile)
 const compiler = webpack(webpackConfig)
 
-const webpackMiddleware = webpackDevMiddleware(compiler, {
-  publicPath: '/'
+const devMiddleware = webpackDevMiddleware(compiler, {
+  publicPath: webpackConfig.output.publicPath
 })
 
 export default () => ({
@@ -16,5 +16,5 @@ export default () => ({
 })
 
 export {
-  webpackMiddleware
+  devMiddleware
 }

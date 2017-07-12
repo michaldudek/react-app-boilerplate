@@ -26,7 +26,7 @@ const assets = require(isProduction ? './assets.prod.js' : './assets.dev.js')
  */
 export default (app) => {
   if (isDevelopment) {
-    app.use(assets.webpackMiddleware)
+    app.use(assets.devMiddleware)
   }
 
   return (req, res) => {

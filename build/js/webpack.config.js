@@ -16,17 +16,30 @@ const postcssNeat = require('postcss-neat')
 
 const paths = require('./paths')
 
+// entries and plugins are dynamic based on NODE_ENV, so define them separately
+const entry = {
+  vendors: [
+    'react',
+    'react-dom'
+  ],
+  app: [paths.indexJs]
+}
+
+const plugins = [
+  new ExtractTextPlugin({
+    filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendors'
+  })
+]
+
 module.exports = {
-  entry: {
-    vendors: [
-      'react',
-      'react-dom'
-    ],
-    app: [paths.indexJs]
-  },
+  entry: entry,
   output: {
     filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
-    path: paths.dist
+    path: paths.dist,
+    publicPath: '/'
   },
   resolve: {
     modules: [paths.nodeModules, paths.src]
@@ -81,12 +94,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors'
-    })
-  ]
+  plugins: plugins
 }
