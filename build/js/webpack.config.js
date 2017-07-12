@@ -34,6 +34,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        exclude: [paths.nodeModules],
         use: {
           loader: 'babel-loader',
           options: {
@@ -53,7 +54,7 @@ module.exports = {
                 minimize: true,
                 sourceMap: true,
                 modules: true,
-                localIdentName: isProduction ? '[hash:base64:5]' : '[name]__[local]__[hash:base64:5]'
+                localIdentName: isProduction ? '[hash:base64:8]' : '[name]__[local]__[hash:base64:5]'
               }
             },
             {
