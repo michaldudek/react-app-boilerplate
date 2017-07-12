@@ -40,6 +40,12 @@ app.set('view engine', 'html')
 // register API middlewares under /api endpoints
 app.use('/api', api())
 
+// in development mode also serve static files
+// (in production this is a function of nginx)
+if (isDevelopment) {
+  app.use(express.static(paths.web))
+}
+
 // register React rendering
 app.use('/', ssr(app))
 
