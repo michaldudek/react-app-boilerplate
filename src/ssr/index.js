@@ -8,6 +8,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
+import Helmet from 'react-helmet'
 
 import App from 'components/App'
 
@@ -40,6 +41,7 @@ export default (app) => {
         <App />
       </StaticRouter>
     ))
+    const helmet = Helmet.renderStatic() // this needs to be right after renderToString() to prevent memory leaks
 
     // did react router asked for redirect ?
     if (routerContext.url) {
@@ -49,7 +51,8 @@ export default (app) => {
 
     res.render('index', {
       ...assets.default(),
-      html: html
+      helmet,
+      html
     })
   }
 }
