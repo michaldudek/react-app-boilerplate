@@ -17,4 +17,9 @@ const assets = {
   ]
 }
 
-export default () => assets
+const list = () => assets
+
+export default list
+export {
+  list
+}

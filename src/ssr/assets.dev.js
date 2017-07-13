@@ -10,11 +10,13 @@ const devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath
 })
 
-export default () => ({
+const list = () => ({
   styles: ['/app.css'],
   scripts: ['/vendors.js', '/app.js']
 })
 
+export default list
 export {
+  list,
   devMiddleware
 }

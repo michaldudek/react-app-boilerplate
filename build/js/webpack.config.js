@@ -19,9 +19,13 @@ const paths = require('./paths')
 // entries and plugins are dynamic based on NODE_ENV, so define them separately
 const entry = {
   vendors: [
+    'prop-types',
     'react',
     'react-dom',
-    'react-router-dom'
+    'react-helmet',
+    'react-redux',
+    'react-router-dom',
+    'redux'
   ],
   app: [paths.indexJs]
 }

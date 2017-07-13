@@ -14,7 +14,7 @@ export default class App extends Component {
         {/* DO NOT REMOVE */}
         <Helmet
           defaultTitle='Pałys & Dudek React App Boilerplate'
-          titleTemplate='%s - Pałys & Dudek React Boilerplate'
+          titleTemplate='%s | Pałys & Dudek React Boilerplate'
         >
           <html lang='en' />
           <meta charset='utf-8' />
