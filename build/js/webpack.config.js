@@ -20,7 +20,8 @@ const paths = require('./paths')
 const entry = {
   vendors: [
     'react',
-    'react-dom'
+    'react-dom',
+    'react-router-dom'
   ],
   app: [paths.indexJs]
 }

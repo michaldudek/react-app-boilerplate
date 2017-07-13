@@ -11,8 +11,8 @@ const devMiddleware = webpackDevMiddleware(compiler, {
 })
 
 export default () => ({
-  styles: ['app.css'],
-  scripts: ['vendors.js', 'app.js']
+  styles: ['/app.css'],
+  scripts: ['/vendors.js', '/app.js']
 })
 
 export {

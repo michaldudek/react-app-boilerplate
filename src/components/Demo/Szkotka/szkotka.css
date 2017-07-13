@@ -1,15 +1,8 @@
 @import 'styles/variables.css';
 
-.root {
+.wrap {
   @neat-span-columns 12;
-}
-
-.title {
-  color: var(--red);
-}
-
-.subtitle {
-  composes: small from 'styles/base.css';
+  border-bottom: 1px solid var(--black);
 }
 
 .image {

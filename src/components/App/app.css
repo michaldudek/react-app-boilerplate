@@ -1,0 +1,37 @@
+@import 'styles/variables.css';
+
+.container {
+  @neat-span-columns 12;
+  padding-top: 50px;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  border-bottom: 1px solid var(--black);
+  height: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.navLink {
+  display: inline-block;
+  line-height: 50px;
+  margin: 0 10px;
+}
+
+.title {
+  text-align: center;
+  color: var(--red);
+}
+
+.subtitle {
+  composes: small from 'styles/base.css';
+  text-align: center;
+}
+
+.content {
+  @neat-span-columns 12;
+}

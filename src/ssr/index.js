@@ -7,8 +7,9 @@
  */
 import React from 'react'
 import { renderToString } from 'react-dom/server'
+import { StaticRouter } from 'react-router-dom'
 
-import Root from 'components/Root'
+import App from 'components/App'
 
 // simple flags
 const isProduction = process.env.NODE_ENV === 'production'
@@ -30,9 +31,21 @@ export default (app) => {
   }
 
   return (req, res) => {
+    const routerContext = {}
     const html = renderToString((
-      <Root />
+      <StaticRouter
+        location={req.url}
+        context={routerContext}
+      >
+        <App />
+      </StaticRouter>
     ))
+
+    // did react router asked for redirect ?
+    if (routerContext.url) {
+      res.redirect(301, routerContext.url)
+      return
+    }
 
     res.render('index', {
       ...assets.default(),
