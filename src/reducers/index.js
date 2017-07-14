@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 
+import demo from './demo'
+
 const reducers = combineReducers({
-  demo: (state = {}) => state
+  demo
 })
 
 export default reducers
