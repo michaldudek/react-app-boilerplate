@@ -31,31 +31,67 @@ function handleRequest (req, res) {
   const store = createStore()
   const routerContext = {}
 
-  const html = renderToString((
-    <Provider store={store}>
-      <StaticRouter
-        location={req.url}
-        context={routerContext}
-      >
-        <App />
-      </StaticRouter>
-    </Provider>
-  ))
-  const helmet = Helmet.renderStatic() // this needs to be right after renderToString() to prevent memory leaks
+  render(req.url, store, routerContext)
+    .then(({ html, helmet }) => {
+      // did react router asked for redirect ?
+      if (routerContext.url) {
+        res.redirect(301, routerContext.url)
+        return
+      }
 
-  // did react router asked for redirect ?
-  if (routerContext.url) {
-    res.redirect(301, routerContext.url)
-    return
-  }
+      res.render('index', {
+        ...assets.default(),
+        helmet,
+        html,
+        initialState: store.getState(),
+        safeJson: (obj) => JSON.stringify(obj).replace(/[\u2028\u2029]/g, '').replace(/<\/script/g, '</scr\\ipt')
+      })
+    })
+}
 
-  res.render('index', {
-    ...assets.default(),
-    helmet,
-    html,
-    initialState: store.getState(),
-    safeJson: (obj) => JSON.stringify(obj).replace(/[\u2028\u2029]/g, '').replace(/<\/script/g, '</scr\\ipt')
-  })
+/**
+ * Render the application, but wait for any async actions promises to resolve.
+ *
+ * Resolves with an object with 'html' and 'helmet' keys.
+ *
+ * @param  {String} url     Request URL.
+ * @param  {Redux}  store   Redux store object.
+ * @param  {Object} context Router context object.
+ *
+ * @return {Promise}
+ */
+function render (url, store, context = {}) {
+  const promises = store.getState()._promises || []
+  const promisesCount = promises.length
+
+  return Promise.all(promises)
+    .then(() => {
+      const html = renderToString((
+        <Provider store={store}>
+          <StaticRouter
+            location={url}
+            context={context}
+          >
+            <App />
+          </StaticRouter>
+        </Provider>
+      ))
+
+      // this needs to be right after renderToString() to prevent memory leaks
+      const helmet = Helmet.renderStatic()
+
+      // if amount of promises in the store has grown
+      // then wait for those new promises to resolve and re-render again
+      const newPromises = store.getState()._promises || []
+      if (newPromises.length > promisesCount) {
+        return render(url, store, context)
+      }
+
+      return {
+        html,
+        helmet
+      }
+    })
 }
 
 /**

@@ -8,7 +8,7 @@ export function demoAction (number) {
       number
     },
     promise: () => new Promise((resolve) => {
-      setTimeout(() => resolve(number * number), 2050)
+      setTimeout(() => resolve(number * number), 250)
     })
   }
 }
