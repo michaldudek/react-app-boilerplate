@@ -1,7 +1,9 @@
 /*
  * Webpack Config
  *
- * ENV responsive config, that has different options based on NODE_ENV :P
+ * "Responsive" config, that has different options based on ENV values.
+ *
+ * NODE_ENV - set to 'production' for production build anything else for dev build
  */
 
 // simple flags
@@ -16,7 +18,7 @@ const postcssNeat = require('postcss-neat')
 
 const paths = require('./paths')
 
-// entries and plugins are dynamic based on NODE_ENV, so define them separately
+// entries and plugins may be dynamic based on NODE_ENV, so define them separately
 const entry = {
   vendors: [
     'prop-types',
