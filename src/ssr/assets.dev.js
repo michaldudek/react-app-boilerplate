@@ -2,12 +2,12 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 
 import * as paths from '../../build/js/paths'
+import webpackConfig from '../../build/js/webpack.config'
 
-const webpackConfig = require(paths.webpackConfigFile)
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath
+  publicPath: paths.publicPath
 })
 
 const list = () => ({

@@ -4,13 +4,19 @@
  * "Responsive" config, that has different options based on ENV values.
  *
  * NODE_ENV - set to 'production' for production build anything else for dev build
+ * TARGET - set to 'server' will build for server app (nodejs), 'client' will build for client
  */
 
 // simple flags
 const isProduction = process.env.NODE_ENV === 'production'
 const isDevelopment = !isProduction
+const isServer = process.env.TARGET === 'server'
+const isClient = !isServer
 
+const fs = require('fs')
+const path = require('path')
 const webpack = require('webpack')
+const universalWebpackConfig = require('universal-webpack/config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const postcssImport = require('postcss-import')
 const postcssNext = require('postcss-cssnext')
@@ -18,58 +24,35 @@ const postcssNeat = require('postcss-neat')
 
 const paths = require('./paths')
 
-// entries and plugins may be dynamic based on NODE_ENV, so define them separately
-const entry = {
-  vendors: [
-    'prop-types',
-    'react',
-    'react-dom',
-    'react-helmet',
-    'react-redux',
-    'react-router-dom',
-    'redux'
-  ],
-  app: [paths.indexJs]
-}
-
-const plugins = [
-  new ExtractTextPlugin({
-    filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendors'
-  })
-]
-
-module.exports = {
-  entry: entry,
-  output: {
-    filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
-    path: paths.dist,
-    publicPath: '/'
-  },
+/*
+ * COMMON CONFIG
+ */
+const common = {
   resolve: {
-    modules: [paths.nodeModules, paths.src]
+    modules: [paths.nodeModules, paths.src],
+    alias: resolveAliases()
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: [paths.nodeModules],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'react-app']
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015', 'react-app']
+            }
           }
-        }
+        ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: require.resolve('style-loader'),
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
           use: [
             {
-              loader: require.resolve('css-loader'),
+              loader: 'css-loader',
               options: {
                 importLoaders: 1,
                 minimize: true,
@@ -79,7 +62,7 @@ module.exports = {
               }
             },
             {
-              loader: require.resolve('postcss-loader'),
+              loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
                 plugins: () => [
@@ -100,6 +83,80 @@ module.exports = {
         })
       }
     ]
+  }
+}
+
+const plugins = [
+  new ExtractTextPlugin({
+    filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
+  })
+]
+
+/*
+ * CLIENT SETTINGS
+ */
+const client = Object.assign({}, common, {
+  entry: {
+    vendors: [
+      'prop-types',
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-redux',
+      'react-router-dom',
+      'redux'
+    ],
+    app: [paths.indexJs]
   },
-  plugins: plugins
+  output: {
+    filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
+    path: paths.webDist,
+    publicPath: paths.publicPath
+  },
+  plugins: plugins.concat([
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors'
+    })
+  ])
+})
+
+/*
+ * SERVER SETTINGS
+ */
+const server = universalWebpackConfig.server(
+  Object.assign({}, common, {
+    output: {
+      filename: 'server.js',
+      path: paths.serverDist,
+      publicPath: '/'
+    },
+    plugins: plugins
+  }),
+  {
+    server: {
+      input: paths.serverJs,
+      output: paths.serverDistJs
+    }
+  }
+)
+
+module.exports = isServer ? server : client
+
+/**
+ * Resolve aliases in src/ dir so they are registered in webpack nicely.
+ *
+ * @return {Object}
+ */
+function resolveAliases () {
+  const aliases = {}
+  fs.readdirSync(paths.src)
+    .map((name) => ({
+      name: name,
+      path: path.resolve(paths.src, name)
+    }))
+    .filter((item) => fs.statSync(item.path).isDirectory())
+    .forEach((item) => {
+      aliases[item.name] = item.path
+    })
+  return aliases
 }

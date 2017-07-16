@@ -15,7 +15,8 @@ module.exports = {
   root: rootDir,
   src: resolve('src'),
   web: webDir,
-  dist: resolve('web/dist'),
+  webDist: resolve('web/dist'),
+  serverDist: resolve('dist'),
   templates: resolve('src/templates'),
 
   // vendor dirs etc
@@ -23,8 +24,13 @@ module.exports = {
   nodeModules: resolve('node_modules'),
   packageJson: resolve('package.json'),
 
+  // public paths
+  publicPath: '/',
+
   // important files
   indexJs: resolve('src/index.js'),
+  serverJs: resolve('src/server.js'),
+  serverDistJs: resolve('dist/server.js'),
   webpackConfigFile: resolve('build/js/webpack.config'),
 
   // functions
