@@ -12,7 +12,7 @@ import { StaticRouter } from 'react-router-dom'
 import Helmet from 'react-helmet'
 
 import App from 'components/App'
-import createStore from 'createStore'
+import createStore from 'store'
 
 // simple flags
 const isProduction = process.env.NODE_ENV === 'production'

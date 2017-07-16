@@ -12,26 +12,30 @@ const resolveWeb = (filePath) => filePath.replace(webDirRegEx, '')
 
 module.exports = {
   // main dirs
-  root: rootDir,
-  src: resolve('src'),
-  web: webDir,
-  webDist: resolve('web/dist'),
-  serverDist: resolve('dist'),
-  templates: resolve('src/templates'),
+  rootDir: rootDir,
+  srcDir: resolve('src'),
+  clientDir: resolve('src/client'),
+  commonDir: resolve('src/common'),
+  serverDir: resolve('src/server'),
+  apiDir: resolve('src/server/api'),
+  webDir: webDir,
+  webDistDir: resolve('web/dist'),
+  serverDistDir: resolve('dist'),
+  templatesDir: resolve('src/server/templates'),
 
   // vendor dirs etc
-  build: resolve('build'),
-  nodeModules: resolve('node_modules'),
-  packageJson: resolve('package.json'),
+  buildDir: resolve('build'),
+  nodeModulesDir: resolve('node_modules'),
+  packageJsonFile: resolve('package.json'),
 
   // public paths
   publicPath: '/',
 
   // important files
-  indexJs: resolve('src/index.js'),
-  serverJs: resolve('src/server.js'),
-  serverDistJs: resolve('dist/server.js'),
-  webpackConfigFile: resolve('build/webpack.config'),
+  clientFile: resolve('src/client/index.js'),
+  serverFile: resolve('src/server/index.js'),
+  serverDistFile: resolve('dist/server.js'),
+  webpackConfigFile: resolve('build/webpack.config.js'),
 
   // functions
   resolveWeb: resolveWeb

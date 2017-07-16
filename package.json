@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "description": "Palys & Dudek React App Skeleton",
-  "main": "src/index.js",
+  "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -9,11 +9,11 @@ import * as paths from '../../build/paths'
 // read all assets files on load and remember
 const assets = {
   styles: [
-    ...glob.sync(paths.dist + '/app.*.css').map(paths.resolveWeb)
+    ...glob.sync(paths.webDistDir + '/app.*.css').map(paths.resolveWeb)
   ],
   scripts: [
-    ...glob.sync(paths.dist + '/vendors.*.js').map(paths.resolveWeb),
-    ...glob.sync(paths.dist + '/app.*.js').map(paths.resolveWeb)
+    ...glob.sync(paths.webDistDir + '/vendors.*.js').map(paths.resolveWeb),
+    ...glob.sync(paths.webDistDir + '/app.*.js').map(paths.resolveWeb)
   ]
 }
 

@@ -25,14 +25,14 @@ module.exports = {
   config: (isProduction) => {
     return {
       resolve: {
-        modules: [paths.nodeModules, paths.src],
+        modules: [paths.nodeModulesDir],
         alias: resolveAliases()
       },
       module: {
         rules: [
           {
             test: /\.js$/,
-            exclude: [paths.nodeModules],
+            exclude: [paths.nodeModulesDir],
             use: [
               {
                 loader: 'babel-loader',
@@ -63,7 +63,7 @@ module.exports = {
                     ident: 'postcss',
                     plugins: () => [
                       postcssImport({
-                        path: [paths.src]
+                        path: [paths.commonDir]
                       }),
                       postcssNext({
                         browsers: ['last 4 versions', '> 1%', 'Firefox ESR', 'not ie < 9'],
@@ -107,10 +107,10 @@ module.exports = {
  */
 function resolveAliases () {
   const aliases = {}
-  fs.readdirSync(paths.src)
+  fs.readdirSync(paths.commonDir)
     .map((name) => ({
       name: name,
-      path: path.resolve(paths.src, name)
+      path: path.resolve(paths.commonDir, name)
     }))
     .filter((item) => fs.statSync(item.path).isDirectory())
     .forEach((item) => {

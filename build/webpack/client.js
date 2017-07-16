@@ -26,11 +26,11 @@ module.exports = (isProduction) => {
         'react-router-dom',
         'redux'
       ],
-      app: [paths.indexJs]
+      app: [paths.clientFile]
     },
     output: {
       filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
-      path: paths.webDist,
+      path: paths.webDistDir,
       publicPath: paths.publicPath
     },
     plugins: common.plugins(isProduction).concat([

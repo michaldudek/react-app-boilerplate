@@ -18,16 +18,16 @@ module.exports = (isProduction) => {
   return universalWebpackConfig.server(
     Object.assign({}, common.config(isProduction), {
       output: {
-        filename: 'server.js',
-        path: paths.serverDist,
-        publicPath: '/'
+        // filename: 'server.js',
+        // path: paths.serverDistDir,
+        // publicPath: '/'
       },
       plugins: common.plugins(isProduction)
     }),
     {
       server: {
-        input: paths.serverJs,
-        output: paths.serverDistJs
+        input: paths.serverFile,
+        output: paths.serverDistFile
       }
     }
   )
