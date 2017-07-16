@@ -15,7 +15,21 @@ const common = require('./common')
  * @return {Object}
  */
 module.exports = (isProduction) => {
+  const plugins = common.plugins(isProduction).concat([
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors'
+    })
+  ])
+
+  if (isProduction) {
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      comments: false
+    }))
+  }
+
   return Object.assign({}, common.config(isProduction), {
+    devtool: isProduction ? 'nosources-source-map' : 'cheap-eval-source-map',
     entry: {
       vendors: [
         'prop-types',
@@ -33,10 +47,6 @@ module.exports = (isProduction) => {
       path: paths.webDistDir,
       publicPath: paths.publicPath
     },
-    plugins: common.plugins(isProduction).concat([
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendors'
-      })
-    ])
+    plugins: plugins
   })
 }
