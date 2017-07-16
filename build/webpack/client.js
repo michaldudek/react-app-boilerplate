@@ -18,6 +18,11 @@ module.exports = (isProduction) => {
   const plugins = common.plugins(isProduction).concat([
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
     })
   ])
 
