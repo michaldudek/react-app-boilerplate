@@ -4,7 +4,7 @@ import nunjucks from 'nunjucks'
 import api from './api'
 import ssr from './ssr'
 
-import paths from '../build/js/paths'
+import paths from '../build/paths'
 
 // simple flags
 const isProduction = process.env.NODE_ENV === 'production'

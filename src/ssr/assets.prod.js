@@ -4,7 +4,7 @@
  * Simply lists all files found in dist
  */
 import glob from 'glob'
-import * as paths from '../../build/js/paths'
+import * as paths from '../../build/paths'
 
 // read all assets files on load and remember
 const assets = {

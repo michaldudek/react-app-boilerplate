@@ -20,7 +20,7 @@ module.exports = {
   templates: resolve('src/templates'),
 
   // vendor dirs etc
-  build: resolve('build/js'),
+  build: resolve('build'),
   nodeModules: resolve('node_modules'),
   packageJson: resolve('package.json'),
 
@@ -31,7 +31,7 @@ module.exports = {
   indexJs: resolve('src/index.js'),
   serverJs: resolve('src/server.js'),
   serverDistJs: resolve('dist/server.js'),
-  webpackConfigFile: resolve('build/js/webpack.config'),
+  webpackConfigFile: resolve('build/webpack.config'),
 
   // functions
   resolveWeb: resolveWeb

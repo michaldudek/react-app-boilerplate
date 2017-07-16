@@ -1,8 +1,8 @@
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 
-import * as paths from '../../build/js/paths'
-import webpackConfig from '../../build/js/webpack.config'
+import * as paths from '../../build/paths'
+import webpackConfig from '../../build/webpack.config'
 
 const compiler = webpack(webpackConfig)
 
