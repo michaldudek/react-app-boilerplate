@@ -5,7 +5,11 @@
   "description": "Palys & Dudek React App Skeleton",
   "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "make start",
+    "dev": "make dev",
+    "build": "make build",
+    "clear": "make clear",
+    "test": "make test"
   },
   "author": "Michal Palys-Dudek",
   "license": "UNLICENSED",

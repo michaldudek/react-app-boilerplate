@@ -11,6 +11,9 @@ build: client server
 
 clear: clear_client clear_server
 
+test:
+	@echo "No tests"
+
 # BUILDING
 clear_client:
 	rm -rf web/dist
