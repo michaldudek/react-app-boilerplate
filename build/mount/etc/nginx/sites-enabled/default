@@ -1,0 +1,28 @@
+upstream app {
+    server 127.0.0.1:3000;
+}
+
+server {
+    listen 80;
+    server_name _;
+
+    root /app/web;
+    index index.html;
+
+    location ~ ^/(dist|fonts?|images?|img|media|videos?|audios?|icons?)/ {
+        try_files $uri $uri/;
+        access_log off;
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public";
+    }
+
+    location @app {
+        proxy_pass http://app;
+        include proxy_params;
+    }
+
+    location / {
+        try_files $uri @app;
+    }
+}

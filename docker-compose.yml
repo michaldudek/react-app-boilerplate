@@ -1,0 +1,12 @@
+version: '2'
+services:
+
+    app:
+        image: palysanddudek/react-app:local
+        ports:
+            - 8000:80
+        volumes:
+            - .:/app
+            - ./.data/logs:/var/log
+        environment:
+            NODE_ENV: production

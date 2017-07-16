@@ -1,8 +1,14 @@
-.PHONY: start dev build clear clear_client clear_server client client_dev server server_dev
+.PHONY: start dev build image clear clear_client clear_server client client_dev server server_dev
+
+IMAGE_NAME=palysanddudek/react-app
+VERSION?=local
 
 # MAIN ENTRY POINTS
-start:
-	NODE_ENV=production node dist/server.js
+start: image
+	@docker-compose up -d
+
+stop:
+	@docker-compose stop
 
 dev: server_dev
 	NODE_ENV=development node dist/server.js
@@ -14,7 +20,18 @@ clear: clear_client clear_server
 test:
 	@echo "No tests"
 
+image:
+	$(info Creating Docker image - ${VERSION})
+	@docker build \
+		-t ${IMAGE_NAME}:${VERSION} \
+		-f build/Dockerfile \
+		--build-arg VERSION=${VERSION} \
+		.
+
 # BUILDING
+deps:
+	npm install
+
 clear_client:
 	rm -rf web/dist
 
