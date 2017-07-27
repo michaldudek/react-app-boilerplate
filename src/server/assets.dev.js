@@ -7,7 +7,8 @@ import webpackConfig from '../../build/webpack.config'
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = webpackDevMiddleware(compiler, {
-  publicPath: paths.publicPath
+  publicPath: paths.publicPath,
+  stats: 'minimal'
 })
 
 const list = () => ({

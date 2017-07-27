@@ -9,6 +9,7 @@ const fs = require('fs')
 const path = require('path')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const postcssImport = require('postcss-import')
 const postcssNext = require('postcss-cssnext')
 const postcssNeat = require('postcss-neat')
@@ -28,6 +29,7 @@ module.exports = {
         modules: [paths.nodeModulesDir],
         alias: resolveAliases()
       },
+      stats: 'minimal',
       module: {
         rules: [
           {
@@ -95,7 +97,8 @@ module.exports = {
     return [
       new ExtractTextPlugin({
         filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
-      })
+      }),
+      new SimpleProgressPlugin()
     ]
   }
 }

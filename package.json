@@ -42,6 +42,7 @@
     "style-loader": "^0.18.2",
     "universal-webpack": "^0.3.11",
     "webpack": "^3.4.1",
-    "webpack-dev-middleware": "^1.11.0"
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-simple-progress-plugin": "0.0.2"
   }
 }
