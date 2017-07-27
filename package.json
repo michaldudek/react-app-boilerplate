@@ -1,7 +1,7 @@
 {
   "name": "michaldudek-react-app-boilerplate",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React App Boilerplate with SSR and Docker and CSS modules and stuff.",
   "author": "Michal Palys-Dudek",
   "license": "UNLICENSED",
