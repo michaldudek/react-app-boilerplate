@@ -24,6 +24,37 @@ module.exports = {
    * @return {Object}
    */
   config: (isProduction) => {
+    const cssLoaders = [
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1,
+          minimize: true,
+          sourceMap: true,
+          modules: true,
+          localIdentName: isProduction ? '[hash:base64:8]' : '[name]__[local]__[hash:base64:5]'
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: () => [
+            postcssImport({
+              path: [paths.commonDir]
+            }),
+            postcssNext({
+              browsers: ['last 4 versions', '> 1%', 'Firefox ESR', 'not ie < 9'],
+              flexbox: 'no-2009'
+            }),
+            postcssNeat({
+              neatGutterWidth: '0.75em'
+            })
+          ]
+        }
+      }
+    ]
+
     return {
       resolve: {
         modules: [paths.nodeModulesDir],
@@ -47,39 +78,10 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    sourceMap: true,
-                    modules: true,
-                    localIdentName: isProduction ? '[hash:base64:8]' : '[name]__[local]__[hash:base64:5]'
-                  }
-                },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    ident: 'postcss',
-                    plugins: () => [
-                      postcssImport({
-                        path: [paths.commonDir]
-                      }),
-                      postcssNext({
-                        browsers: ['last 4 versions', '> 1%', 'Firefox ESR', 'not ie < 9'],
-                        flexbox: 'no-2009'
-                      }),
-                      postcssNeat({
-                        neatGutterWidth: '0.75em'
-                      })
-                    ]
-                  }
-                }
-              ]
-            })
+            // no need to use extract text plugin in dev, and it also breaks HMRE for css
+            use: isProduction
+              ? ExtractTextPlugin.extract({ fallback: 'style-loader', use: cssLoaders })
+              : ['style-loader', ...cssLoaders]
           }
         ]
       }
@@ -95,12 +97,17 @@ module.exports = {
    * @return {Object}
    */
   plugins: (isProduction) => {
-    return [
-      new ExtractTextPlugin({
-        filename: isProduction ? '[name].[contenthash:8].css' : '[name].css'
-      }),
+    const plugins = [
       new SimpleProgressPlugin()
     ]
+
+    if (isProduction) {
+      plugins.push(new ExtractTextPlugin({
+        filename: '[name].[contenthash:8].css'
+      }))
+    }
+
+    return plugins
   }
 }
 
