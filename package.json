@@ -1,8 +1,10 @@
 {
-  "name": "palys-dudek-react-app",
+  "name": "michaldudek-react-app-boilerplate",
   "private": true,
   "version": "0.0.0",
-  "description": "Palys & Dudek React App Skeleton",
+  "description": "React App Boilerplate with SSR and stuff.",
+  "author": "Michal Palys-Dudek",
+  "license": "UNLICENSED",
   "main": "dist/server.js",
   "scripts": {
     "start": "make start",
@@ -11,8 +13,6 @@
     "clear": "make clear",
     "test": "make test"
   },
-  "author": "Michal Palys-Dudek",
-  "license": "UNLICENSED",
   "dependencies": {
     "express": "^4.15.3",
     "prop-types": "^15.5.10",
