@@ -17,11 +17,13 @@
     "express": "^4.15.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-component-needs": "^1.0.0",
     "react-dom": "^15.6.1",
     "react-helmet": "^5.1.3",
     "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "redux": "^3.7.2"
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-promise-await-middleware": "^1.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -36,10 +38,10 @@
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
-    "postcss-neat": "^2.5.2",
+    "postcss-neat": "^2.5.3",
     "style-loader": "^0.18.2",
     "universal-webpack": "^0.3.11",
-    "webpack": "^3.1.0",
+    "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.11.0"
   }
 }

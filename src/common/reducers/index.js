@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
+import { promiseAwaitReducer } from 'redux-promise-await-middleware'
 
-import { promiseReducer } from 'lib/promiseMiddleware'
 import demo from './demo'
 
 const reducers = combineReducers({
   demo,
-  _promises: promiseReducer
+  _promises: promiseAwaitReducer()
 })
 
 export default reducers

@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
         processing: false
       }
 
-    case DEMO_ACTION + '__ASYNC':
+    case DEMO_ACTION + '//PENDING':
       return {
         ...state,
         processing: true

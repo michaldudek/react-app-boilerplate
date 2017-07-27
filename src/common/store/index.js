@@ -3,9 +3,12 @@ import {
   compose,
   applyMiddleware
 } from 'redux'
+import {
+  promiseAwaitMiddleware,
+  promiseMiddleware
+} from 'redux-promise-await-middleware'
 
 import reducers from 'reducers'
-import promiseMiddleware from 'lib/promiseMiddleware'
 
 export default (initialState = {}) => {
   const store = createStore(
@@ -13,7 +16,8 @@ export default (initialState = {}) => {
     initialState,
     compose(
       applyMiddleware(
-        promiseMiddleware
+        promiseAwaitMiddleware(),
+        promiseMiddleware()
       )
     )
   )

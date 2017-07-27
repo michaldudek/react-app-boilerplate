@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import needs from 'lib/component-needs'
+import { needs } from 'react-component-needs'
 
 import { demoAction } from 'actions/demo'
 import DemoNumber from 'components/Demo/Number'
