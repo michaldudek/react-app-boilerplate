@@ -33,7 +33,11 @@ module.exports = (isProduction) => {
     }))
   }
 
-  return Object.assign({}, common.config(isProduction), {
+  if (!isProduction) {
+    plugins.push(new webpack.HotModuleReplacementPlugin())
+  }
+
+  const config = Object.assign({}, common.config(isProduction), {
     devtool: isProduction ? 'nosources-source-map' : 'cheap-eval-source-map',
     entry: {
       vendors: [
@@ -54,4 +58,12 @@ module.exports = (isProduction) => {
     },
     plugins: plugins
   })
+
+  // enable hot module reload in development
+  if (!isProduction) {
+    config.entry.app.unshift('react-hot-loader/patch')
+    config.entry.app.push('webpack-hot-middleware/client')
+  }
+
+  return config
 }

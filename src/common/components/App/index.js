@@ -26,6 +26,7 @@ export default class App extends Component {
 
         {/* App html */}
         <nav className={style.nav}>
+          <Link to='/number/2' className={style.navLink}>Number 2</Link>
           <Link to='/szkotka/Brendy' className={style.navLink}>Szkotka Brendy</Link>
           <Link to='/szkotka/Bosfor' className={style.navLink}>Szkot Bosfor</Link>
           <Link to='/szkotka/Mietka' className={style.navLink}>Szkotka Mietka</Link>

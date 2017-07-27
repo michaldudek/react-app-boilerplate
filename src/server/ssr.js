@@ -104,6 +104,7 @@ function render (url, store, context = {}) {
 export default (app) => {
   if (isDevelopment) {
     app.use(assets.devMiddleware)
+    app.use(assets.hotMiddleware)
   }
 
   return handleRequest

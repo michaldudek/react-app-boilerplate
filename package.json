@@ -39,10 +39,12 @@
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
     "postcss-neat": "^2.5.3",
+    "react-hot-loader": "^3.0.0-beta.7",
     "style-loader": "^0.18.2",
     "universal-webpack": "^0.3.11",
     "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.2",
     "webpack-simple-progress-plugin": "0.0.2"
   }
 }
