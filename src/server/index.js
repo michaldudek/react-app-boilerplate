@@ -1,6 +1,7 @@
 import express from 'express'
 import nunjucks from 'nunjucks'
 import detect from 'detect-port-alt'
+import openBrowser from 'opn'
 
 import api from './api'
 import ssr from './ssr'
@@ -39,6 +40,10 @@ function startServer () {
   const started = () => {
     const url = `http://localhost:${app.server.address().port}/`
     console.log(`Listening on ${url}`)
+
+    if (isDevelopment) {
+      openBrowser(url)
+    }
   }
 
   // detect available port in development mode
