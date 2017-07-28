@@ -10,10 +10,12 @@ const compiler = webpack(webpackConfig)
 const devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: paths.publicPath,
   stats: 'minimal',
-  noInfo: true
+  quiet: true
 })
 
-const hotMiddleware = webpackHotMiddleware(compiler)
+const hotMiddleware = webpackHotMiddleware(compiler, {
+  log: () => null
+})
 
 const list = () => ({
   styles: [],

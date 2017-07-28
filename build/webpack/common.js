@@ -10,6 +10,7 @@ const path = require('path')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const postcssImport = require('postcss-import')
 const postcssNext = require('postcss-cssnext')
 const postcssNeat = require('postcss-neat')
@@ -105,6 +106,10 @@ module.exports = {
       plugins.push(new ExtractTextPlugin({
         filename: '[name].[contenthash:8].css'
       }))
+    }
+
+    if (!isProduction) {
+      plugins.push(new FriendlyErrorsPlugin())
     }
 
     return plugins
