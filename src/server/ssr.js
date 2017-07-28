@@ -97,14 +97,22 @@ function render (url, store, context = {}) {
 /**
  * Exports middleware that handles server side rendering of React.
  *
- * @param {Express} app Express app.
+ * @param {Express}  app      Express app.
+ * @param {Function} callback Callback to be called when SSR is ready to handle requests.
  *
  * @return {Function}
  */
-export default (app) => {
+export default (app, callback = null) => {
+  callback = typeof callback === 'function' ? callback : () => null
+
   if (isDevelopment) {
     app.use(assets.devMiddleware)
     app.use(assets.hotMiddleware)
+
+    assets.devMiddleware.waitUntilValid(callback)
+  } else {
+    // in production we're ready immediatelly
+    callback()
   }
 
   return handleRequest

@@ -28,9 +28,14 @@ if (isDevelopment) {
   app.use(express.static(paths.webDir))
 }
 
-// register React rendering
-app.use('/', ssr(app))
+// register React rendering and start the server once it's ready to handle requests
+app.use('/', ssr(app, startServer))
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000!')
-})
+/**
+ * Start the server.
+ */
+function startServer () {
+  app.listen(3000, () => {
+    console.log('Listening on port 3000!')
+  })
+}

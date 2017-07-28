@@ -9,13 +9,14 @@ const compiler = webpack(webpackConfig)
 
 const devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: paths.publicPath,
-  stats: 'minimal'
+  stats: 'minimal',
+  noInfo: true
 })
 
 const hotMiddleware = webpackHotMiddleware(compiler)
 
 const list = () => ({
-  styles: ['/app.css'],
+  styles: [],
   scripts: ['/vendors.js', '/app.js']
 })
 
