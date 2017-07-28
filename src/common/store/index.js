@@ -10,11 +10,26 @@ import {
 
 import reducers from 'reducers'
 
+// support redux devtools browser extension
+const composeWithDevTools = (
+  process.env.NODE_ENV !== 'production' &&
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+)
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  : compose
+
+/**
+ * Creates a configured Redux store.
+ *
+ * @param  {Object} initialState Initial state.
+ * @return {Redux}
+ */
 export default (initialState = {}) => {
   const store = createStore(
     reducers,
     initialState,
-    compose(
+    composeWithDevTools(
       applyMiddleware(
         promiseAwaitMiddleware(),
         promiseMiddleware()
