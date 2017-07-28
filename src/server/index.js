@@ -1,5 +1,6 @@
 import express from 'express'
 import nunjucks from 'nunjucks'
+import detect from 'detect-port-alt'
 
 import api from './api'
 import ssr from './ssr'
@@ -35,7 +36,19 @@ app.use('/', ssr(app, startServer))
  * Start the server.
  */
 function startServer () {
-  app.listen(3000, () => {
-    console.log('Listening on port 3000!')
-  })
+  const started = () => {
+    const url = `http://localhost:${app.server.address().port}/`
+    console.log(`Listening on ${url}`)
+  }
+
+  // detect available port in development mode
+  // otherwise stick to 3000 and fail to run if smth's wrong
+  // because nginx will proxy to 3000 regardless
+  if (isDevelopment) {
+    detect(3000).then((port) => {
+      app.server = app.listen(port, started)
+    })
+  } else {
+    app.server = app.listen(3000, started)
+  }
 }
