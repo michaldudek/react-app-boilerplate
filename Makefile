@@ -1,6 +1,7 @@
 .PHONY: start dev build image clear clear_client clear_server client client_dev server server_dev
 
-IMAGE_NAME=palysanddudek/react-app
+IMAGE_NAME=michaldudek/react-app
+REGISTRY?=
 VERSION?=local
 
 # MAIN ENTRY POINTS
@@ -23,10 +24,14 @@ test:
 image:
 	$(info Creating Docker image - ${VERSION})
 	@docker build \
-		-t ${IMAGE_NAME}:${VERSION} \
+		-t ${REGISTRY}${IMAGE_NAME}:${VERSION} \
 		-f build/Dockerfile \
 		--build-arg VERSION=${VERSION} \
 		.
+
+push: image
+	$(info Pushing Docker image - ${VERSION})
+	@docker push ${REGISTRY}${IMAGE_NAME}:${VERSION}
 
 # BUILDING
 deps:
