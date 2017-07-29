@@ -8,6 +8,7 @@
 const fs = require('fs')
 const path = require('path')
 
+const notifier = require('node-notifier')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -109,7 +110,17 @@ module.exports = {
     }
 
     if (!isProduction) {
-      plugins.push(new FriendlyErrorsPlugin())
+      plugins.push(new FriendlyErrorsPlugin({
+        onErrors: (severity, errors) => {
+          errors.map((error) => {
+            notifier.notify({
+              title: 'Compilation ' + severity,
+              subtitle: error.file || '',
+              message: error.name
+            })
+          })
+        }
+      }))
     }
 
     return plugins
