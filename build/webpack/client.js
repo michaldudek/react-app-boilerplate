@@ -3,10 +3,13 @@
  *
  * Exports function that builds webpack config for client builds.
  */
+const fs = require('fs')
 const webpack = require('webpack')
 
 const paths = require('../paths')
 const common = require('./common')
+
+const packageJson = JSON.parse(fs.readFileSync(paths.packageJsonFile))
 
 /**
  * Build webpack config for client builds.
@@ -41,15 +44,7 @@ module.exports = (isProduction) => {
   const config = Object.assign({}, common.config(isProduction), {
     devtool: isProduction ? 'nosources-source-map' : 'cheap-eval-source-map',
     entry: {
-      vendors: [
-        'prop-types',
-        'react',
-        'react-dom',
-        'react-helmet',
-        'react-redux',
-        'react-router-dom',
-        'redux'
-      ],
+      vendors: Object.keys(packageJson.dependencies),
       app: [paths.clientFile]
     },
     output: {

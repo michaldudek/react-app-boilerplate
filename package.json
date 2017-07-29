@@ -14,7 +14,6 @@
     "test": "make test"
   },
   "dependencies": {
-    "express": "^4.15.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-component-needs": "^1.0.0",
@@ -33,6 +32,7 @@
     "babel-preset-react-app": "^3.0.1",
     "css-loader": "^0.28.4",
     "detect-port-alt": "^1.1.3",
+    "express": "^4.15.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "glob": "^7.1.2",
