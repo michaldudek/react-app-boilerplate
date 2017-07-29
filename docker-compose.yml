@@ -2,7 +2,7 @@ version: '2'
 services:
 
     app:
-        image: palysanddudek/react-app:local
+        image: michaldudek/react-app:local
         ports:
             - 8000:80
         volumes:
