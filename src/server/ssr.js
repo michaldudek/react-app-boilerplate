@@ -9,6 +9,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
+import util from 'util'
 import Helmet from 'react-helmet'
 
 import App from 'components/App'
@@ -46,6 +47,13 @@ function handleRequest (req, res) {
         initialState: store.getState(),
         safeJson: (obj) => JSON.stringify(obj).replace(/[\u2028\u2029]/g, '').replace(/<\/script/g, '</scr\\ipt')
       })
+    }, (err) => {
+      const errorMsg = (err.stack)
+          ? err.stack
+          : util.inspect(err)
+
+      console.error(errorMsg)
+      res.status(500).end(isDevelopment ? errorMsg : 'Internal server error')
     })
 }
 
